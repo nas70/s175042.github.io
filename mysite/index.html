@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js sample</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+​
+<body>
+  <h1>自由時間計算ツール</h1>
+  <h2>時間を無駄にしていませんか？</h2>
+  <p>好きなことができる時間がどれくらいあるか一度は考えたことがあるでしょう。しかし実際に計算したことはあまり多くないと思います。この時間を知っておくことで、自分が時間を有効活用出来ているかを見つめ直すことが出来ます。
+　<p>このサイトでは、あなたが自由の好きなように使える時間を１日入力するだけで、週、月、年単位で調べることが出来ます。さらに、表示された時間を時給に換算する事で、あなた自身の時間の価値を知ることが出来ます。
+  </p>
+  <h3>あなたの１日の自由時間を入力して下さい。</h3>
+  <div id="app">
+    <input v-model.number="time" type="number"> 時間
+      <p>1週間の自由時間  {{week}}時間</p>
+      <p>1か月の自由時間  {{month}}時間</p>
+      <p>1年の自由時間  {{year}}時間</p>
+  <h4>福岡の最低賃金の１時間842円で計算すると</h4>
+      <p v-html="images"></p>
+  　  <p>1日  {{price}}円</p>
+    </div>
+​
+    <script>
+    new Vue({
+      el: '#app',
+      data: {
+        time: 0
+        },
+      computed: {
+        //timeが変わったら、各値を算出する
+        week: function(){
+          return this.time * 7;
+          },
+        month: function(){
+          return this.time * 31;
+          },
+        year: function(){
+          return this.time * 365;
+          },
+        price:function(){
+          return this.time * 842;
+        },
+        //priceが変わったら画像を表示
+        images: function(){
+          let satsutaba = "";
+					for (let i = 1000; i < this.price; i += 1000) {
+            satsutaba += "<img src = ./images/image1.png></img>";
+          }
+          return satsutaba;
+        }
+      }
+    })
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
